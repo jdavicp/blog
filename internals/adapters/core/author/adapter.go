@@ -8,13 +8,18 @@ type User struct {
 	name     string
 	email    ap.EmailPort
 	username ap.UsernamePort
+	password string
 }
 
-func New(name string, email ap.EmailPort, username ap.UsernamePort) *User {
+func New(name string, email ap.EmailPort, username ap.UsernamePort, password string) *User {
+	if email.Address() == "" || username.Username() == "" {
+		return &User{}
+	}
 	return &User{
 		name,
 		email,
 		username,
+		password,
 	}
 }
 
